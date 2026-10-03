@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#536be8">
+  <title>Student portal — BBIT</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../student_portal.css">
+  <script src="../demo-data.js" defer></script>
+  <script src="../student_portal.js" defer></script>
+  
+</head>
+<body class="student-body">
+  <header class="student-topbar">
+    <a class="student-brand" href="index.html">
+      <span class="student-brand-mark" aria-hidden="true">B</span>
+      <span><strong>BBIT</strong><small>Student success</small></span>
+    </a>
+    <a class="button button-sm" href="../faculty/index.html">Faculty sign-in</a>
+  </header>
+
+  <main class="student-main">
+    <section class="student-login card" id="student-login-panel">
+      <div class="student-eyebrow">Your learning, in view</div>
+      <h1>Welcome to your student portal.</h1>
+      <p class="student-intro">View the latest monthly academic snapshot shared by your faculty.</p>
+
+      <div class="student-portal-status" id="student-portal-status" role="status" aria-live="polite">
+        Checking whether the student portal is open…
+      </div>
+      <form id="student-login-form" class="student-login-form">
+        <label for="student-roll-number">College roll number</label>
+        <input id="student-roll-number" name="rollNumber" type="text" inputmode="numeric" autocomplete="username" placeholder="27600125001…" pattern="27600125001[0-9]{0,9}" maxlength="20" required>
+        <small class="student-help">Your roll number starts with 27600125001.</small>
+        <div class="student-demo-credentials">
+          <strong>Demo student sign-in</strong>
+          <span>Roll: <code>27600125001</code> · DOB: <code>2005-01-15</code></span>
+          <button class="button button-sm" id="fill-demo-credentials" type="button">Fill demo details</button>
+        </div>
+
+        <label for="student-date-of-birth">Date of birth</label>
+        <input id="student-date-of-birth" name="dateOfBirth" type="date" autocomplete="bday" required>
+
+        <div class="student-login-message" id="student-login-message" role="alert" aria-live="polite"></div>
+        <button class="button button-primary student-login-submit" id="student-login-submit" type="submit" disabled>Check portal status…</button>
+      </form>
+      <p class="student-privacy">Demo only: the sample date of birth is checked against fictional data in this browser. Never enter real student credentials or records. Contact your faculty mentor if you have questions.</p>
+    </section>
+
+    <section class="student-dashboard" id="student-dashboard" hidden>
+      <div class="student-dashboard-heading">
+        <div>
+          <span class="student-demo-badge">DEMO · FICTIONAL SAMPLE</span>
+          <div class="student-eyebrow" id="student-month">Monthly progress</div>
+          <h1 id="student-name">Your dashboard</h1>
+          <p class="student-intro"><span id="student-roll-display"></span><span aria-hidden="true"> · </span><span id="student-department"></span><span id="student-academic-term"></span></p>
+          <section class="student-own-photo" aria-label="Your profile photo">
+            <div class="student-own-photo-frame"><img id="student-own-photo-image" alt="Your passport-size student photo" hidden><span id="student-own-photo-initials" aria-hidden="true">B</span></div>
+            <div class="student-own-photo-copy">
+              <strong>Your profile photo</strong>
+              <p>Upload a clear passport-size photo. It will be saved in this browser for your faculty to view.</p>
+              <div class="student-own-photo-actions">
+                <label class="button button-sm" for="student-own-photo-input">Upload or change photo<input class="sr-only" id="student-own-photo-input" type="file" accept="image/*"></label>
+                <button class="button button-sm" id="student-own-photo-remove" type="button" hidden>Remove</button>
+              </div>
+              <p class="student-own-photo-status" id="student-own-photo-status" role="status" aria-live="polite"></p>
+            </div>
+          </section>
+        </div>
+        <button class="button" id="student-sign-out" type="button">Sign out</button>
+      </div>
+
+      <article class="card student-welcome">
+        <div class="student-welcome-icon" aria-hidden="true">✓</div>
+        <div><h2>Your progress, at a glance</h2><p>These figures are a snapshot of your academic records. They are not a judgement of your ability. If anything feels difficult, your faculty mentor is here to listen.</p></div>
+      </article>
+
+      <div class="student-metric-grid">
+        <article class="card student-metric-card">
+          <div class="student-metric-heading"><span>Attendance</span><span class="student-metric-symbol">%</span></div>
+          <strong class="student-metric-value" id="student-attendance">—</strong>
+          <div class="student-progress"><span id="student-attendance-bar"></span></div>
+          <small>Classes attended</small>
+        </article>
+        <article class="card student-metric-card">
+          <div class="student-metric-heading"><span>Midterm score</span><span class="student-metric-symbol">↗</span></div>
+          <strong class="student-metric-value" id="student-midterm">—</strong>
+          <div class="student-progress"><span id="student-midterm-bar"></span></div>
+          <small>Internal assessment</small>
+        </article>
+        <article class="card student-metric-card">
+          <div class="student-metric-heading"><span>Lab viva</span><span class="student-metric-symbol">✓</span></div>
+          <strong class="student-metric-value" id="student-lab">—</strong>
+          <div class="student-progress"><span id="student-lab-bar"></span></div>
+          <small>Practical assessment</small>
+        </article>
+        <article class="card student-metric-card">
+          <div class="student-metric-heading"><span>Assignments</span><span class="student-metric-symbol">↘</span></div>
+          <strong class="student-metric-value" id="student-delay">—</strong>
+          <div class="student-progress student-progress-days"><span id="student-delay-bar"></span></div>
+          <small>Average days submitted late</small>
+        </article>
+      </div>
+
+      <article class="card student-overall">
+        <div><div class="student-eyebrow">A balanced snapshot</div><h2>Overall progress</h2><p>An average of your attendance, midterm and lab-viva percentages.</p></div>
+        <strong id="student-overall-score">—</strong>
+      </article>
+      <p class="student-updated" id="student-last-updated"></p>
+    </section>
+  </main>
+  <footer class="student-footer">BBIT · A supportive check-in, when you need one.</footer>
+</body>
+</html>

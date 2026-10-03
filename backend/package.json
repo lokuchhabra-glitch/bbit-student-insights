@@ -1,0 +1,21 @@
+{
+  "name": "bbit-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BBIT faculty and student portal API",
+  "main": "backend_server_node_js.js",
+  "scripts": {
+    "start": "node backend_server_node_js.js",
+    "check": "node --check backend_server_node_js.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "mongoose": "^8.19.1",
+    "nodemailer": "^7.0.10"
+  }
+}
